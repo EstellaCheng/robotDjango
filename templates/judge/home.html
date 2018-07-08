@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>智能外卖机器人系统</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/home.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function startMap(){
+            $.ajax({
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            url:"/main",
+            type:"POST",
+            //data:,
+            success:function () {
+              alert("场景构建完毕！");
+            }
+            })
+        }
+         function sendTakeout(){
+            var roomNum = $('#roomNum').val() ;
+            $.ajax({
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            url:"/send",
+            type:"POST",
+            data:{"room_num":roomNum},
+            success:function (data) {
+              alert("开始配送！");
+            }
+            })
+        }
+    </script>
+</head>
+<body style=" background-color:#E0EEE0;">
+   <div class="main" >
+        <h1 class="header">智能外卖机器人系统</h1>
+
+
+           <div align="center" style="margin-top:15%">
+               <button class="btn btn-success text-align" onclick="startMap()">开始扫描</button>
+                <br> <br><br> <br>
+                <span style="font-size: 18px">目的房间号:</span>
+               <input type="text" placeholder="目的房间号"style="width:20%" id="roomNum">
+               <br><br><br> <br>
+               <button class="btn btn-success text-align" onclick="sendTakeout()">立即配送！</button>
+           </div>
+           </div>
+
+
+
+       </div>
+
+
+</body>
+</html>
